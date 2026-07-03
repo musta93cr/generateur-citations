@@ -4,7 +4,7 @@ const zone = document.querySelector('.zone-citation');
 /*btn.addEventListener('click', () => {
     zone.textContent = 'Citation ajoutée!';
     preventDefault();
-    // Your code here
+    
 });*/
 function generateCitation() {
     let listCitation = ["citation 1", "citation 2", "citation 3", 
@@ -20,4 +20,26 @@ function generateCitation() {
    btn.addEventListener('click',() => {
     generateCitation();
    });
-   
+   async function generateCitation() {
+    try {zone.classList.add('fade');
+        zone.textContent = "Chargement...";
+        const response = await fetch('https://api.quotable.io/random');
+        const data = await response.json();
+        setTimeout(() => {
+            zone.classList.remove('fade');
+            zone.textContent = `"${data.content}" — ${data.author}`;
+        }, 300); // Ajout d'un délai de 300ms pour permettre à l'animation de se produire
+       
+    } catch (error) {
+       zone.textContent = 'impossible de générer une citation. Veuillez réessayer plus tard.';
+    }
+   }
+   // Fonction asynchrone pour générer une citation depuis une API
+// try = bloc principal, catch = gestion des erreurs
+// Ajout d’une animation + message de chargement
+// fetch + await = récupération des données de l’API
+// JSON = conversion des données en objet JS
+// setTimeout = petit délai pour fluidifier l’affichage
+// Affichage de la citation + auteur dans la zone
+// Retrait de l’animation après affichage
+// En cas d’erreur : message d’erreur + suppression animation

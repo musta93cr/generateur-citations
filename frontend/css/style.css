@@ -56,3 +56,10 @@ body {
     color: #333;
    line-height: 1.6;/*espace entre les lignes*/
 }
+.quote {
+    transition: opacity 0.3s ease;
+}
+
+.fade {
+    opacity: 0;
+}
